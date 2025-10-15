@@ -24,7 +24,7 @@ def run_experiment(loss_rate):
             bandwidth_mbps=BANDWIDTH_MBPS,
             timeout_sec=TIMEOUT
         )
-        data = simulator.run(SIM_DURATION, dt=0.01)  # 使用 10ms 时间步长
+        data = simulator.run(SIM_DURATION, dt=0.05)  # 使用 10ms 时间步长
         elapsed = time.time() - start_time
         print(f"  ✅ 完成！耗时: {elapsed:.2f} 秒")
         results[name] = data

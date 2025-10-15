@@ -35,7 +35,7 @@ class TCPCubic(TCPSender):
             self.last_loss_time = self.time
             self.epoch_start = self.time
 
-        # CUBIC窗口增长计算（修正版）
+        # CUBIC窗口增长计算
         if self.time - self.epoch_start > 0:
             t = self.time - self.epoch_start
             K = (self.w_max * (1 - self.BETA) / self.C) ** (1 / 3)
@@ -63,7 +63,7 @@ class TCPCubic(TCPSender):
         self.w_max = max(self.cwnd * 0.5, 1.0)
         self.last_loss_time = self.time
         self.epoch_start = self.time
-        # 窗口减半（更符合CUBIC规范）
+        # 窗口减半
         self.cwnd = max(1.0, self.cwnd * self.BETA)
         self.in_flight = 0
         self.acked_packets.clear()
