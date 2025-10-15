@@ -56,7 +56,7 @@ class NetworkSimulator:
                     newly_acked_bytes += TCPSender.MSS
                     self.in_flight_bytes = max(0, self.in_flight_bytes - TCPSender.MSS)
 
-            # === 超时检测：改进版 ===
+            # === 超时检测 ===
             timeout_occurred = False
             for s, send_t in list(self.packet_send_times.items()):
                 if s not in self.acked_seqs and (self.time - send_t) > self.timeout_sec:
@@ -77,5 +77,5 @@ class NetworkSimulator:
 
             self.metrics.record(self.time, self.sender, newly_acked_bytes)
 
-        # ✅ 修复：返回收集到的指标数据
+        # 返回收集到的指标数据
         return self.metrics.get_data()
